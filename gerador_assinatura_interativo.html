@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerador de Assinatura - Planning LTDA</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body style="background-color: #0f0f1a; color: white; font-family: 'Segoe UI', sans-serif; padding: 20px;">
+
+  <h2>Gerador de Assinatura</h2>
+
+  <label>Nome:</label><br>
+  <input type="text" id="nome" style="width: 100%; padding: 5px;"><br><br>
+
+  <label>Cargo:</label><br>
+  <select id="cargo" style="width: 100%; padding: 5px;">
+    <option value="Analista de Dados">Analista de Dados</option>
+    <option value="Engenheiro de Planejamento">Engenheiro de Planejamento</option>
+    <option value="Coordenador de Projetos">Coordenador de Projetos</option>
+    <option value="Supervisor de Manutenção">Supervisor de Manutenção</option>
+    <option value="Chief Technology Officer - CTO">Chief Technology Officer - CTO</option>
+  </select><br><br>
+
+  <label>Telefone:</label><br>
+  <input type="text" id="telefone" style="width: 100%; padding: 5px;"><br><br>
+
+  <label>E-mail:</label><br>
+  <input type="email" id="email" style="width: 100%; padding: 5px;"><br><br>
+
+  <button onclick="gerarAssinatura()" style="padding: 10px 20px; background-color: #0152CA; color: white; border: none;">Gerar Assinatura</button>
+  <button onclick="baixarImagem()" style="padding: 10px 20px; background-color: #02804a; color: white; border: none;">Baixar Imagem</button>
+
+  <br><br>
+  <div id="assinatura" style="width: 600px; position: relative; padding: 20px; background-color: #0f0f1a; display: flex; color: white; font-family: 'Segoe UI', sans-serif;">
+
+    <!-- Blocos azuis -->
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+      <div style="position: absolute; width: 40px; height: 40px; background-color: #0152CA; top: 20px; left: 20px;"></div>
+      <div style="position: absolute; width: 20px; height: 20px; background-color: #0152CA; top: 100px; left: 100px;"></div>
+      <div style="position: absolute; width: 15px; height: 15px; background-color: #0152CA; top: 160px; left: 60px;"></div>
+      <div style="position: absolute; width: 30px; height: 30px; background-color: #0152CA; top: 80px; left: 220px;"></div>
+      <div style="position: absolute; width: 12px; height: 12px; background-color: #0152CA; top: 180px; left: 160px;"></div>
+      <div style="position: absolute; width: 10px; height: 10px; background-color: #0152CA; top: 60px; left: 300px;"></div>
+    </div>
+
+    <!-- Logotipo -->
+    <div style="z-index: 12; padding-right: 100px; padding-top: 65px;">
+      <img src="https://i.imgur.com/La063EU.png" style="width: 150px;" />
+    </div>
+
+    <!-- Informações -->
+    <div style="z-index: 2;">
+      <p style="margin: 0; font-size: 18px; font-weight: bold;" id="outNome">[NOME]</p>
+      <p style="margin: 0; font-size: 14px;" id="outCargo">[CARGO]</p>
+      <hr style="border: 0; border-top: 1px solid #0152CA; margin: 10px 0; width: 80%;">
+      <p style="margin: 4px 0;">📞 <span id="outTelefone">[TELEFONE]</span></p>
+      <p style="margin: 4px 0;">✉️ <span id="outEmail">[EMAIL]</span></p>
+      <p style="margin: 4px 0;">🌐 www.planningltda.com.br</p>
+      <p style="margin: 4px 0;">📍 Av. Prof. Manoel Martins, 491 - 11º andar, cobertura 2<br>Campo Alegre, Conselheiro Lafaiete - MG</p>
+    </div>
+  </div>
+
+<script>
+function gerarAssinatura() {
+  document.getElementById("outNome").innerText = document.getElementById("nome").value;
+  document.getElementById("outCargo").innerText = document.getElementById("cargo").value;
+  document.getElementById("outTelefone").innerText = document.getElementById("telefone").value;
+  document.getElementById("outEmail").innerText = document.getElementById("email").value;
+}
+
+function baixarImagem() {
+  html2canvas(document.querySelector("#assinatura")).then(canvas => {
+    const link = document.createElement('a');
+    link.download = 'assinatura_planning.png';
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  });
+}
+</script>
+
+</body>
+</html>
